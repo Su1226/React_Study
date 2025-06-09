@@ -28,7 +28,10 @@ npm create vite@latest
 3. Choose JavaScript + SWC as variable.
 4. Navigate to the appropriate folder path.
 5. Install as 'npm install'.
+6. Start as 'npm run dev' 
 
 ---
 
 Refer to 'https://ko.react.dev/learn/build-a-react-app-from-scratch'
+
+Refer to 'https://react.vlpt.us/'
