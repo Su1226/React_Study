@@ -10,3 +10,28 @@ Currently, two official plugins are available:
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+
+## STEP1 Install a build tool
+The first step is to install a build tool vite. This build tools provide features to package and run source code, provide a development server for local development and a build command to deploy your app to a production server.
+
+
+Vite is a build tool that aims to provide a fast and concise development environment for modern web projects.
+
+```
+npm create vite@latest
+```
+
+## STEP2 Setting Up a Project
+1. Create a project name.
+2. Select React as the framework to use.
+3. Choose JavaScript + SWC as variable.
+4. Navigate to the appropriate folder path.
+5. Install as 'npm install'.
+6. Start as 'npm run dev' 
+
+---
+
+Refer to 'https://ko.react.dev/learn/build-a-react-app-from-scratch'
+
+Refer to 'https://react.vlpt.us/'
