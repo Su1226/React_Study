@@ -5,10 +5,6 @@ import React from 'react';
 
 function IndexHeader(props) {
 
-    const handleOnClick = () => {
-
-    }
-
     return (
         <>
             <div css={s.container}>

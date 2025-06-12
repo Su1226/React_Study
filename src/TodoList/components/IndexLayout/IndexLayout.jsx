@@ -3,11 +3,11 @@ import React from 'react';
 import * as s from './styles';
 import IndexHeader from '../IndexHeader/IndexHeader';
 
-function IndexLayout({childern}) {
+function IndexLayout({children}) {
     return (
         <div css={s.layout}>
             <IndexHeader />
-            {childern}
+            {children}
         </div>
     );
 }
