@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import * as s from './styles';
+import { IoTrash } from 'react-icons/io5';
 
 function IndexMain({todoList, setTodoList}) {
 
@@ -26,11 +27,12 @@ function IndexMain({todoList, setTodoList}) {
 
         console.log("todo 등록")
 
-        // Input 창에 입력된 내용들을 setter. 
+        // Input 창에 입력된 내용들을 리스트에 저장하는 setter. 
         setTodoList(prev => {
+            // prev는 todoList에 담긴 리스트를 전부 가져온다. 
             const lastId = (prev.length === 0 ? 0 : prev[prev.length - 1].id);
-            // ID가 0이라는 것은 선택된 것이 없다는 의미. 
-            // 또한 prev.length - 1을 한 것은 id 값을 부여해주기 위함. 
+            // 처음 가져오는 것은 아무것도 없는 빈 리스트일 것이다. 그렇기 때문에 0.
+            // 만약 처음 가져오는 것이 아니라면, prev.length - 1로 리스트의 마지막 인덱스를 가져온다. 
 
             const newTodo = {
                 id: lastId + 1,
@@ -82,6 +84,14 @@ function IndexMain({todoList, setTodoList}) {
         // 아래 return 값에서 먼저 todoId를 먼저 가져와야만 한다. 
     }
 
+    const handleDeleteOnClick = (todoId) => {
+        setTodoList(prev => prev.filter(todo => todo.id !== todoId));
+        // 위 코드는 div에 코드를 올렸을 때, 삭제 기능이 담긴 아이콘이 뜨고
+        // 삭제를 클릭하게 되면, 현재 삭제하려는 id와 다른 것들은 다른 배열에 담고,
+        // 삭제하고자 하는 id의 DOM만 삭제가 된다. (<li>~<li>)
+
+    }
+
     return (
         <div css={s.container}> 
             <div css={s.listContainer}>
@@ -91,12 +101,20 @@ function IndexMain({todoList, setTodoList}) {
                             <li key={todo.id}>
                                 <input type="checkbox" id={`todo${todo.id}`} value={todo.id} checked={todo.isComplete} onChange={handleCheckBoxOnChange} />
                                 <label htmlFor={`todo${todo.id}`}></label>
-                                    <div css={s.todoTextContainer(contentsOpenId === todo.id)} onClick={() => handleContentsOpenOnClick(todo.id)}>{todo.content}</div>
+                                <div css={s.todoTextContainer(contentsOpenId === todo.id)} onClick={() => handleContentsOpenOnClick(todo.id)}>{todo.content}</div>
+                                <div css={s.hiddenTrashBox}>
+                                    <div css={s.TrashBox} onClick={() => handleDeleteOnClick(todo.id)}>
+                                        <IoTrash />
+                                </div>
+                                </div>
                             </li>
                         ))
 
                         // ul 안의 li가 계속 추가될 것이기 때문에, 
                         // todoList에 값을 넣어주기 위해 map을 통해 값을 넣어준다. 
+                        // 단, 데이터가 들어가기 시작할 때부터 돌아가기 시작한다. 
+
+                        // li의 key값을 주어서, 값을 비교해서 동작을 실행한다.                               
                     }
 
                 </ul>
@@ -110,3 +128,6 @@ function IndexMain({todoList, setTodoList}) {
 }
 
 export default IndexMain;
+
+// 코드를 먼저 보기 전에 화면을 보면서 '어떻게 동작하고, 무엇이 필요할까?'를 먼저 고민한다.
+// 그 다음 코드를 보면서, 화면과 동작을 확인한다. 

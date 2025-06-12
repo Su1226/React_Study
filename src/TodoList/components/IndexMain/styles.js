@@ -20,6 +20,7 @@ export const listContainer = css`
         overflow-y: scroll;
 
         & > li {
+            position: relative;
             display: flex;
             box-sizing: border-box;
             border-bottom: 1px solid #dbdbdd;
@@ -55,9 +56,6 @@ export const listContainer = css`
 
 export const todoTextContainer = (isOpen) => css`
     margin-left: 10px;
-
-
-    
     width: 280px;
     text-align: start;
     cursor: pointer;
@@ -73,8 +71,34 @@ export const todoTextContainer = (isOpen) => css`
         text-overflow: ellipsis;
         overflow: hidden;`
     }
-`
+`;
+export const hiddenTrashBox = css`
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 36px;
+        height: 36px;
+        overflow: hidden;
 
+        &:hover > div {
+            right: 0px;
+        }
+`;
+
+export const TrashBox = css`
+        position: absolute;
+        top: 0;
+        right: -36px;
+        transition: all 0.2s ease-in-out;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 36px;
+        height: 36px;
+        background-color: #ea0808;
+        color: #fff;
+        cursor: pointer;
+`;
 
 export const todoInputContainer = css`
     box-sizing: border-box;
