@@ -41,6 +41,7 @@ Refer to 'https://yong-nyong.tistory.com/80' (Virtual Dom)
 - Document : https://reactrouter.com/
 
 Refer to 'https://tanstack.com/query/latest/docs/framework/react/overview'
-- React Query Document 
+- React Query Document
+- Install : npm i @tanstack/react-query
 
 Refer to 'https://velog.io/@remon/React-%EB%A6%AC%EC%95%A1%ED%8A%B8-%EB%9D%BC%EC%9D%B4%ED%94%84-%EC%82%AC%EC%9D%B4%ED%81%B4' (Life Cycle)
