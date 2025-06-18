@@ -185,8 +185,12 @@ function Signin(props) {
         });
 
         try {
-            await axios.post(url, data);      
-            alert("로그인이 요청 정상 처리");
+            const response = await axios.post(url, data);      
+            const accessToken = response.data?.accessToken;
+            if (!!accessToken) {
+                localStorage.setItem("AccessToken", accessToken);
+            }
+            alert("로그인이 요청 완료");
         } catch {
             alert("로그인 오류");
         }
