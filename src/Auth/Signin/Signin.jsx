@@ -173,7 +173,7 @@ function Signin(props) {
         // async가 붙은 경우? 비동기이자 Promise
         // 어떨 때 쓰는가? await을 써야 하는 경우
         
-        const url = "http://localhost:8080/api/users"
+        const url = "http://localhost:8080/api/users/login"
 
         let data = {};
 
@@ -186,9 +186,9 @@ function Signin(props) {
 
         try {
             await axios.post(url, data);      
-            alert("사용자 등록 완료");
+            alert("로그인이 요청 정상 처리");
         } catch {
-            alert("사용자 등록 오류");
+            alert("로그인 오류");
         }
     }
 

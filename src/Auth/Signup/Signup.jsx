@@ -154,8 +154,8 @@ function Signup(props) {
             value: "",
             valid: {
                 enabled: true,
-                regex: /^(?=.*[a-z])(?=.*\d).{4,20}$/,
-                message: "비밀번호는 영문, 숫자를 포함 4~20자여야 합니다.",
+                regex: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*()_+\-=\[\]{};':"\\|,.<>/?]).{8,20}$/,
+                message: "비밀번호는 8~20자이며, 영문·숫자·특수문자를 모두 포함해야 합니다.",
             },
         },
         {
@@ -167,11 +167,10 @@ function Signup(props) {
             valid: {
                 enabled: false,
                 regex: null,
-                callback: () =>inputItems[1].inputValue === inputItems[2].inputValue,
+                callback: () => inputItems[1].value === inputItems[2].value,
                 message: "비밀번호가 서로 일치하지 않습니다.",
             },
         },
-
         {
             id: 4,
             type: "text",
@@ -181,10 +180,9 @@ function Signup(props) {
             valid: {
                 enabled: true,
                 regex: /^[가-힣]{2,20}$/,
-                message: "이름은 2~20자의 한글만 입력할 수 있습니다.",
+                message: "이름은 한글 2~20자여야 합니다.",
             },
         },
-
         {
             id: 5,
             type: "email",
@@ -204,6 +202,7 @@ function Signup(props) {
     // [input, input, input, ... ] -> [{}] 가 된다. 
     // 그래서 useSignInAndUpInput의 return 결과 객체이다. 
     // [useSignInAndUpInput(리턴값), useSignInAndUpInput(리턴값) ... ] 과 같은 형태로 반환. 
+    // [input, input] -> [useSignInAndUpInput(리턴값), useSignInAndUpInput(리턴값)]
 
     useEffect(() => {
         setSubmitDisabled(!!inputItems.find(inputItem => inputItem.status !== "success"))
