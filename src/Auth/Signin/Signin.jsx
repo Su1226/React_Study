@@ -4,7 +4,8 @@ import * as s from './styles';
 import React, { useEffect, useRef, useState } from 'react';
 import { IoEye, IoEyeOff } from 'react-icons/io5';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useRefreshStore } from '../stores/storesStudy';
 
 /**
  * 유효성 검사(Validation Check)
@@ -123,9 +124,11 @@ function PasswordInputHiddenButton({isShow, onClick}) {
     return <p onClick={onClick}>{isShow ? <IoEyeOff /> : <IoEye />}</p>
 }
 
-function Signin(props) {
+function Signin() {
+    const navigate = useNavigate();
     const location = useLocation();
 
+    const { setValue:setRefresh } = useRefreshStore();
     const [ submitDisabled, setSubmitDisabled ] = useState(true);
     // 버튼 활성화 여부를 결정하는 상태 변수 
 
@@ -189,9 +192,13 @@ function Signin(props) {
             const accessToken = response.data?.accessToken;
             if (!!accessToken) {
                 localStorage.setItem("AccessToken", accessToken);
+                setRefresh(prev => true);
+                navigate("/");
             }
             alert("로그인이 요청 완료");
         } catch {
+            const { response, status } = error;
+            console.log(response.data);
             alert("로그인 오류");
         }
     }
