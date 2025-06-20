@@ -6,6 +6,7 @@ import { IoEye, IoEyeOff } from 'react-icons/io5';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useRefreshStore } from '../stores/storesStudy';
+import { useQueryClient } from '@tanstack/react-query';
 
 /**
  * 유효성 검사(Validation Check)
@@ -125,12 +126,11 @@ function PasswordInputHiddenButton({isShow, onClick}) {
 }
 
 function Signin() {
+    const queryClient = useQueryClient();
     const navigate = useNavigate();
     const location = useLocation();
-
     const { setValue:setRefresh } = useRefreshStore();
     const [ submitDisabled, setSubmitDisabled ] = useState(true);
-    // 버튼 활성화 여부를 결정하는 상태 변수 
 
     const inputs = [
         {
@@ -192,7 +192,9 @@ function Signin() {
             const accessToken = response.data?.accessToken;
             if (!!accessToken) {
                 localStorage.setItem("AccessToken", accessToken);
-                setRefresh(prev => true);
+                queryClient.invalidateQueries({
+                    queryKey: ["principalUserQuery"], // Query의 유효시간을 제거한다. -> 다시 query를 가져오게 한다.
+                }); 
                 navigate("/");
             }
             alert("로그인이 요청 완료");
